@@ -178,24 +178,22 @@ function editComputer() {
     console.log(displayComp(cyberGame.showAllComputers()));
     console.log(`0. Thoát`);
     do {
+        let listComputers = cyberGame.showAllComputers();
         choice = +input.question('Enter choice: ');
         if (choice === 0) {
             break;
         }
         else {
-            const computer = cyberGame.showAllComputers()[choice-1];
+            let computer = listComputers[choice-1];
             console.log(`Máy cần sửa:
             ${choice}: Máy ${computer.id} - Tình trạng: ${computer.status}`);
             let id = input.question('New ID: ');
-            const newComputer = new Computer(id, computer.status, computer.time, computer.moneyService);
-            if (id > cyberGame.showAllComputers().length) {
-                cyberGame.removeComputer(choice-1);
+            let newComputer = new Computer(id, computer.status, computer.time, computer.moneyService);
+            if (id >= listComputers.length) {
+                cyberGame.removeComputer(id)
                 cyberGame.addComputer(newComputer);
             }
-            else {
-                cyberGame.editComputer(id-1, computer);
-                cyberGame.editComputer(choice-1, newComputer);
-            }
+            cyberGame.editComputer(choice-1, newComputer);
             editComputer();
             break;
         }
@@ -302,7 +300,7 @@ function payBill() {
 function buyService() {
     let choice = -1;
     console.log(`------------------------------Chọn máy cần mua------------------------------------`);
-    console.log(displayComp(cyberGame.showOnlineComputers()));
+    console.log(displayComp(cyberGame.showAllComputers()));
     console.log(`0. Thoát`);
     do {
         choice = +input.question('Enter choice: ');
@@ -317,7 +315,6 @@ function buyService() {
                 console.log(`
                 ${i+1}: ${serviceManager.showAllServices()[i].name} - Giá: ${serviceManager.showAllServices()[i].price}$`);
             }
-            console.log(`0. Thoát`);
                 choice2 = +input.question('Enter choice: ');
                 if (choice2 === 0) {
                     break;

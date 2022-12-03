@@ -302,7 +302,7 @@ function payBill() {
 function buyService() {
     let choice = -1;
     console.log(`------------------------------Chọn máy cần mua------------------------------------`);
-    console.log(displayComp(cyberGame.showOnlineComputers()));
+    console.log(displayComp(cyberGame.showAllComputers()));
     console.log(`0. Thoát`);
     do {
         choice = +input.question('Enter choice: ');
@@ -313,7 +313,7 @@ function buyService() {
             let choice2 = -1;
             do {
                 console.log(`--------------------------Chọn dịch vụ muốn mua-----------------------`);
-            for (let i = 0; i < serviceManager.showAllServices().length; i++) {
+            for (let i = 0; i < serviceManager.show().length; i++) {
                 console.log(`
                 ${i+1}: ${serviceManager.showAllServices()[i].name} - Giá: ${serviceManager.showAllServices()[i].price}$`);
             }

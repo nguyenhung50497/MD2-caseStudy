@@ -302,7 +302,7 @@ function payBill() {
 function buyService() {
     let choice = -1;
     console.log(`------------------------------Chọn máy cần mua------------------------------------`);
-    console.log(displayComp(cyberGame.showOnlineComputers()));
+    console.log(displayComp(cyberGame.showAllComputers()));
     console.log(`0. Thoát`);
     do {
         choice = +input.question('Enter choice: ');

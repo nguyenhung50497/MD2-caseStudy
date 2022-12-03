@@ -193,8 +193,14 @@ function editComputer() {
                 cyberGame.addComputer(newComputer);
             }
             else {
-                cyberGame.editComputer(id-1, computer);
-                cyberGame.editComputer(choice-1, newComputer);
+                for (let i = 0; i < cyberGame.showAllComputers().length; i++) {
+                    // if (cyberGame.showAllComputers()[i].id === id) {
+                    //     cyberGame.editComputer(i, computer);
+                    //     cyberGame.editComputer(choice-1, newComputer);
+                    //     break;
+                    // }
+                    console.log
+                }  
             }
             editComputer();
             break;
@@ -302,7 +308,7 @@ function payBill() {
 function buyService() {
     let choice = -1;
     console.log(`------------------------------Chọn máy cần mua------------------------------------`);
-    console.log(displayComp(cyberGame.showOnlineComputers()));
+    console.log(displayComp(cyberGame.showAllComputers()));
     console.log(`0. Thoát`);
     do {
         choice = +input.question('Enter choice: ');
@@ -317,7 +323,6 @@ function buyService() {
                 console.log(`
                 ${i+1}: ${serviceManager.showAllServices()[i].name} - Giá: ${serviceManager.showAllServices()[i].price}$`);
             }
-            console.log(`0. Thoát`);
                 choice2 = +input.question('Enter choice: ');
                 if (choice2 === 0) {
                     break;

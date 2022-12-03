@@ -1,19 +1,19 @@
 export class Computer {
-    id: number;
+    name: string;
     status: string;
     moneyService: number;
     time: Date = new Date();
     totalMoney: number = 0;
 
-    constructor(id: number, status: string, time: Date, moneyService: number) {
-        this.id = id;
+    constructor(name: string, status: string, time: Date, moneyService: number) {
+        this.name = name;
         this.status = status;
         this.time = time;
         this.moneyService = moneyService;
     }
 
-    public getId(): number {
-        return this.id;
+    public getName(): string {
+        return this.name;
     }
     public getStatus(): string {
         return this.status;
@@ -24,8 +24,8 @@ export class Computer {
     public getMoneyService(): number {
         return this.moneyService;
     }
-    public setId(id: number) {
-        this.id = id;
+    public setName(name: string) {
+        this.name = name;
     }
     public setStatus(status: string) {
         this.status = status;
@@ -37,6 +37,6 @@ export class Computer {
         this.moneyService = moneyService;
     }
     toString() {
-        return 'Máy ' + this.id + ' -- Tình trạng: ' + this.status + ' -- Tiền dịch vụ: ' + this.moneyService  + '$\n';
+        return  this.name + ' -- Tình trạng: ' + this.status + ' -- Tiền dịch vụ: ' + this.moneyService  + '$\n';
     }
 }

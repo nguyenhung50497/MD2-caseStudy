@@ -12,7 +12,7 @@ export class ComputerManager {
         this.listComputers[index].id = computer.id;
     }
     removeComputer(index: number) {
-        this.listComputers.splice(index, 1);
+        return this.listComputers.splice(index, 1);
     }
     buyService(index: number, service: Service) {
         return this.listComputers[index].totalMoney += service.price;

@@ -24,7 +24,7 @@ export class Computer {
     public getMoneyService(): number {
         return this.moneyService;
     }
-    public setId(id: number) {
+    public setName(id: number) {
         this.id = id;
     }
     public setStatus(status: string) {
@@ -37,6 +37,6 @@ export class Computer {
         this.moneyService = moneyService;
     }
     toString() {
-        return 'Máy ' + this.id + ' -- Tình trạng: ' + this.status + ' -- Tiền dịch vụ: ' + this.moneyService  + '$\n';
+        return 'Máy ' + this.name + ' -- Tình trạng: ' + this.status + ' -- Tiền dịch vụ: ' + this.moneyService  + '$\n';
     }
 }
