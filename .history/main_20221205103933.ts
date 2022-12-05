@@ -324,7 +324,7 @@ function buyService() {
                     console.log(`-----------------------------Chọn số lượng----------------------------`);
                     let quantity = +input.question(`Enter quantity: `);
                     let newService = serviceManager.showAllServices()[choice2-1];
-                    cyberGame.showOnlineComputers()[choice-1].moneyService += (newService.price * quantity);
+                    cyberGame.showAllComputers()[choice-1].moneyService += newService.price * quantity;
                     buyService();
                     break;
                 }
@@ -453,7 +453,7 @@ function editAccount() {
                    console.log(`-----------Mật khẩu sai cú pháp, yêu cầu nhập lại------------`);           
                    newPassword = input.question('New password: ', {hideEchoBack: true});
                }
-               else if (newPassword.toUpperCase() === account.password.toUpperCase()) {
+               else if (newPassword.toUpperCase() === account.password.toUpperCase) {
                    flag = false;
                    console.log(`-----------Mật khẩu trùng mật khẩu cũ, yêu cầu nhập lại------------`);           
                    newPassword = input.question('New password: ', {hideEchoBack: true});

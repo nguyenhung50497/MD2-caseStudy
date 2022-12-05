@@ -324,7 +324,7 @@ function buyService() {
                     console.log(`-----------------------------Chọn số lượng----------------------------`);
                     let quantity = +input.question(`Enter quantity: `);
                     let newService = serviceManager.showAllServices()[choice2-1];
-                    cyberGame.showOnlineComputers()[choice-1].moneyService += (newService.price * quantity);
+                    cyberGame.showAllComputers()[choice-1].moneyService += newService.price * quantity;
                     buyService();
                     break;
                 }

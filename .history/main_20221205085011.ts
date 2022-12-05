@@ -324,7 +324,7 @@ function buyService() {
                     console.log(`-----------------------------Chọn số lượng----------------------------`);
                     let quantity = +input.question(`Enter quantity: `);
                     let newService = serviceManager.showAllServices()[choice2-1];
-                    cyberGame.showOnlineComputers()[choice-1].moneyService += (newService.price * quantity);
+                    cyberGame.showAllComputers()[choice-1].moneyService += newService.price * quantity;
                     buyService();
                     break;
                 }
@@ -395,7 +395,10 @@ function addAccount() {
     do {
         let arr = password.split('');
         let space =  arr.filter((value: string) => value === ' ').length;
-        if (password.length > 10 || password.length < 1 || space > 0) {
+    //    if (password.length > 10 || password.length < 1 || space > 0) {
+        if (password.filter(function () {
+            return password.value.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$/);
+        })) {
            flag = false;
            console.log(`-----------Mật khẩu sai cú pháp, yêu cầu nhập lại------------`);           
            password = input.question('Mat khau: ', {hideEchoBack: true});
@@ -420,49 +423,46 @@ function editAccount() {
             break;
         }
         else {
-            const account = listAccount[choice-1];
+            let account = listAccount[choice-1];
             console.log(`Tk cần sửa:
             ${choice}: ${account.id} - OldUsername: ${account.userName} - OldPassword: ${account.password}`);
-            let newUserName = input.question('New username: ');
+            let userName = input.question('New username: ');
             let flag = true;
             do {
-                let arr = newUserName.split('');
+                let arr = userName.split('');
                 let space =  arr.filter((value: string) => value === ' ').length;
-                let str = userManager.showAllUsers().filter(name => name.userName === newUserName.toUpperCase());
-                if (newUserName.trim().length > 10 || newUserName.trim().length < 1 || space > 0) {
+                let str = userManager.showAllUsers().filter(name => name.userName === userName.toUpperCase());
+                if (userName.trim().length > 10 || userName.trim().length < 1 || space > 0) {
                     flag = false;
                     console.log(`-----------Tên đăng nhập không hợp lệ, yêu cầu tạo lại-----------`);
-                    newUserName = input.question('New username: ');
+                    userName = input.question('New username: ');
                 }
                 else if (str.length > 0) {
                     flag = false;
                     console.log(`-----------Tên đăng nhập bị trùng, yêu cầu tạo lại-----------`);
-                    newUserName = input.question('New username: ');
+                    userName = input.question('New username: ');
                 }
                 else {
                     flag = true;
                 }
             } while (flag !== true);
             flag = true;
-            let newPassword = input.question('New password: ', {hideEchoBack: true});
+            let password = input.question('New password: ', {hideEchoBack: true});
             do {
-                let arr = newPassword.split('');
+                let arr = password.split('');
                 let space =  arr.filter((value: string) => value === ' ').length;
-               if (newPassword.length > 10 || newPassword.length < 1 || space > 0) {
+               if (password.length > 10 || password.length < 1 || space > 0) {
                    flag = false;
                    console.log(`-----------Mật khẩu sai cú pháp, yêu cầu nhập lại------------`);           
-                   newPassword = input.question('New password: ', {hideEchoBack: true});
-               }
-               else if (newPassword.toUpperCase() === account.password.toUpperCase()) {
-                   flag = false;
-                   console.log(`-----------Mật khẩu trùng mật khẩu cũ, yêu cầu nhập lại------------`);           
-                   newPassword = input.question('New password: ', {hideEchoBack: true});
+                   password = input.question('New password: ', {hideEchoBack: true});
                }
                else {
                    flag = true;
                }
             } while (flag !== true);
-            let newAccount = new User(account.id, newUserName.toUpperCase(), newPassword.toUpperCase());
+            let newUser = new User(id, userName.toUpperCase(), password.toUpperCase());
+            userManager.addUser(newUser);
+            let newAccount = new User(account.id, userName.toUpperCase(), password.toUpperCase());
             userManager.editUser(choice-1, newAccount);
             editAccount();
             break;

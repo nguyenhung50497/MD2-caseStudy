@@ -154,9 +154,9 @@ function showOffline() {
             break;
         }
         else {
-            cyberGame.showAllComputers()[choice-1].status = 'online';
-            cyberGame.showAllComputers()[choice-1].time = new Date();
-            cyberGame.showAllComputers()[choice-1].moneyService = 0;
+            cyberGame.showAllComputers()[choice-1].setStatus('online');
+            cyberGame.showAllComputers()[choice-1].setTime(new Date());
+            cyberGame.showAllComputers()[choice-1].setMoneyService(0);
             showOffline();
             break;
         }
@@ -183,9 +183,9 @@ function editComputer() {
         else {
             const computer = cyberGame.showAllComputers()[choice-1];
             console.log(`Máy cần sửa:
-            ${choice}: Máy ${computer.id} - Tình trạng: ${computer.status}`);
+            ${choice}: Máy ${computer.getId()} - Tình trạng: ${computer.get}`);
             let id = input.question('New ID: ');
-            const newComputer = new Computer(id, computer.status, computer.time, computer.moneyService);
+            const newComputer = new Computer(id, computer.getStatus(), computer.getTime(), computer.getMoneyService());
             if (id > cyberGame.showAllComputers().length) {
                 cyberGame.removeComputer(choice-1);
                 cyberGame.addComputer(newComputer);
@@ -324,7 +324,7 @@ function buyService() {
                     console.log(`-----------------------------Chọn số lượng----------------------------`);
                     let quantity = +input.question(`Enter quantity: `);
                     let newService = serviceManager.showAllServices()[choice2-1];
-                    cyberGame.showOnlineComputers()[choice-1].moneyService += (newService.price * quantity);
+                    cyberGame.showAllComputers()[choice-1].moneyService += newService.price * quantity;
                     buyService();
                     break;
                 }

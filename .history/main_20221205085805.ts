@@ -324,7 +324,7 @@ function buyService() {
                     console.log(`-----------------------------Chọn số lượng----------------------------`);
                     let quantity = +input.question(`Enter quantity: `);
                     let newService = serviceManager.showAllServices()[choice2-1];
-                    cyberGame.showOnlineComputers()[choice-1].moneyService += (newService.price * quantity);
+                    cyberGame.showAllComputers()[choice-1].moneyService += newService.price * quantity;
                     buyService();
                     break;
                 }
@@ -437,7 +437,7 @@ function editAccount() {
                 else if (str.length > 0) {
                     flag = false;
                     console.log(`-----------Tên đăng nhập bị trùng, yêu cầu tạo lại-----------`);
-                    newUserName = input.question('New username: ');
+                    userName = input.question('New username: ');
                 }
                 else {
                     flag = true;
@@ -453,7 +453,7 @@ function editAccount() {
                    console.log(`-----------Mật khẩu sai cú pháp, yêu cầu nhập lại------------`);           
                    newPassword = input.question('New password: ', {hideEchoBack: true});
                }
-               else if (newPassword.toUpperCase() === account.password.toUpperCase()) {
+               else if (newPassword === account.password) {
                    flag = false;
                    console.log(`-----------Mật khẩu trùng mật khẩu cũ, yêu cầu nhập lại------------`);           
                    newPassword = input.question('New password: ', {hideEchoBack: true});
@@ -462,7 +462,7 @@ function editAccount() {
                    flag = true;
                }
             } while (flag !== true);
-            let newAccount = new User(account.id, newUserName.toUpperCase(), newPassword.toUpperCase());
+            let newAccount = new User(account.id, userName.toUpperCase(), newPassword.toUpperCase());
             userManager.editUser(choice-1, newAccount);
             editAccount();
             break;
